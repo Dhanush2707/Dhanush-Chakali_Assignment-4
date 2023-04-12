@@ -1,8 +1,22 @@
 import boto3
-import json
-import configparser
 
+sns_client = boto3.client('sns')
 
-config = configparser.ConfigParser()
-config.read('config.py')
+response = sns_client.create_topic(
+    Name='my-topic'
+)
 
+topic_arn = response['TopicArn']
+
+response = sns_client.subscribe(
+    TopicArn=topic_arn,
+    Protocol='email',
+    Endpoint='dxc74730@ucmo.edu'
+)
+
+print(response['SubscriptionArn'])
+
+response = sns.publish(
+    TopicArn=topic_arn,
+    Subject='Test message for SNS',
+    Message='Assignment-4')
