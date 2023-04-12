@@ -16,7 +16,7 @@ response = sns_client.subscribe(
 
 print(response['SubscriptionArn'])
 
-response = sns.publish(
+response = sns_client.publish(
     TopicArn=topic_arn,
     Subject='Test message for SNS',
     Message='Assignment-4')
